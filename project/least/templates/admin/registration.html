@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign up</title>
+        <link rel="stylesheet" href="{% static 'bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
+	    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome-pro-5.3.1-web/css/all.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 d-flex justify-content-center align-items-center">
+
+                    <div class="reg_content align-items-center">
+                        <h1 class="reg_title">
+                            Sign up
+                        </h1>
+
+                        <form method="post">
+                            <div class="form_block">
+                                {% csrf_token %}
+                                {% if form.non_field_errors %}
+                                    <ul>
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+
+                                {% for error in form.fullname.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                                {{ form.fullname }}
+                                {% for error in form.place_of_work.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                                {{ form.place_of_work }}
+                                {% for error in form.email.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                                {{ form.email }}
+                                {% for error in form.password.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                                {{ form.password }}
+                                <span toggle="#id_password" class="far fa-eye field-icon toggle-password"></span>
+                            </div>
+                            <div class="form-next">
+                                <button type="submit" class="signup-btn" value="">Sign up</button>
+                                <a href="{% url 'admin-login' %}">
+                                    <button type="button" class="signin-btn">or Sign in</button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 admin d-flex justify-content-center align-items-center">
+                    <div class="align-items-center">
+                        <img src="{% static 'img/Illustration One.svg' %}" alt="">
+                    </div>
+                </div>
+			</div>
+		</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script>
+		$(".toggle-password").click(function() {
+
+		    $(this).toggleClass("fa-eye fa-eye-slash");
+		    var input = $($(this).attr("toggle"));
+		    if (input.attr("type") === "password") {
+		        input.attr("type", "text");
+		    } else {
+		        input.attr("type", "password");
+		    }
+		});
+	</script>
+</body>
+</html>
